@@ -149,26 +149,8 @@ def Complex_Step_constraint(f,x,h=1e-20):  #Notice the smaller h
     # This is probably wrong. Lets see what we can do here.
 
 def Forward_AD(f,x):
-    # We can use jax.grad(f)(x) to evaluate the gradient.
-    # However, the same is done if we do jax_jacfwd(f)(x), but this can handle the full jacobian too.
-
     J = jax_jacfwd(f)(x)
-    # J = np.array(J,dtype=float)                 # Convert from jax array to numpy array
-    # print("Returning Jacobian: ", J," \nShape = ", J.shape)
-
     return J
-
-# def Forward_AD(f,x):
-#     def wrapped_jacobian(x):
-#         J = jax_jacfwd(f)(x)  # Compute the Jacobian at x
-#         return np.array(J, dtype=float)  # Convert JAX array to NumPy
-#     return wrapped_jacobian  # Return function, not evaluated array
-
-# def Forward_AD_constraint(f,x):
-#     def wrapped_jacobian(x):
-#         J = jax_jacfwd(f)(x)
-#         return np.array(J, dtype=float)
-#     return wrapped_jacobian
 #-----------------Examples on how to use the package-------------------------
 
 # def f1(x):
